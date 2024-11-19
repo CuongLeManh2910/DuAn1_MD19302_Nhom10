@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#9C27B0"
+    tools:context=".DangNhap">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_margin="30dp"/>
+
+    <!-- Layout đăng nhập -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập số điện thoại"
+            android:inputType="phone"
+            android:layout_marginBottom="12dp"
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#9C27B0"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập mật khẩu"
+            android:inputType="textPassword"
+            android:layout_marginBottom="12dp"
+            android:padding="12dp"
+            android:background="@drawable/rounded_edittext"
+            android:textColor="#9C27B0"/>
+
+        <CheckBox
+            android:id="@+id/cbRememberPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lưu mật khẩu"
+            android:layout_marginBottom="16dp"
+            android:textColor="#9C27B0"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Đăng nhập"
+                android:backgroundTint="#9C27B0"
+                android:textColor="@color/white"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnHuy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hủy"
+                android:backgroundTint="#9C27B0"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đăng ký"
+            android:backgroundTint="#9C27B0"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/btnSignInWithGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign in with Google"
+            android:backgroundTint="#9C27B0"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,5 @@
+<!-- drawable/top_bar_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#9C27B0"/> <!-- Màu tím đậm -->
+    <corners android:radius="8dp"/>  <!-- Bo góc thanh trên cùng -->
+</shape>

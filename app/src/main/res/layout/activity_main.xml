@@ -1,0 +1,198 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:id="@+id/main"
+    tools:context=".MainActivity">
+
+    <!-- Greeting Message -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#9C27B0">
+        <TextView
+            android:id="@+id/greeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, Wisteria Ravenclaw"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/total_balance_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thu Nhập"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
+            <TextView
+                android:id="@+id/total_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$560,50"
+                android:textSize="24sp"
+                android:textColor="@android:color/holo_green_dark"/>
+
+            <!-- Expenses and Incomes -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/expenses_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chi tiêu"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/expenses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$790,50"
+                        android:textSize="24sp"
+                        android:textColor="@android:color/holo_red_dark"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/incomes_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Số dư"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/incomes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$1.700,50"
+                        android:textSize="24sp"
+                        android:textColor="@android:color/holo_blue_dark"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- A tip for fixing your budget -->
+            <TextView
+                android:id="@+id/budget_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A tip for fixing your budget"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- Recent Transactions -->
+        <TextView
+            android:id="@+id/recent_transactions_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giao dịch gần đây"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Example Transaction Item -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="390dp"/>
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/transaction_name"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:text="Food perspiciatis unde"-->
+            <!--                android:textSize="16sp"/>-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/transaction_date"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="19 March"-->
+            <!--                android:textSize="16sp"/>-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/transaction_amount"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="-$40"-->
+            <!--                android:textSize="16sp"-->
+            <!--                android:textColor="@android:color/holo_red_dark"-->
+            <!--                android:layout_marginLeft="8dp"/>-->
+            <!--        </LinearLayout>-->
+
+            <!-- Add more transaction items similarly -->
+        </LinearLayout>
+
+        <!-- Navigation Bar -->
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/nav_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_home"/>
+        <ImageView
+            android:id="@+id/nav_expenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_expenses"/>
+        <ImageView
+            android:id="@+id/nav_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_stats"/>
+        <ImageView
+            android:id="@+id/nav_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_profile"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,6 @@
+<!-- drawable/edittext_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFFFFF"/> <!-- Màu nền trắng -->
+    <corners android:radius="12dp"/>  <!-- Bo góc cho EditText -->
+    <stroke android:color="#6200EE" android:width="2dp"/> <!-- Viền màu tím đậm -->
+</shape>

@@ -1,0 +1,219 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/main"
+    tools:context=".MainActivity">
+
+    <!-- Thanh trên cùng -->
+    <TextView
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Giỏ hàng - khách"
+        android:padding="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@drawable/top_bar_background"
+        android:gravity="center"
+        android:textColor="@android:color/white"/>
+
+    <!-- Nút quay lại và Nút bật/tắt -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingVertical="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Back Button"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <RadioGroup
+            android:id="@+id/toggleGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="16dp">
+
+            <RadioButton
+                android:id="@+id/expressButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Express"
+                android:textColor="@android:color/black"
+                android:buttonTint="@android:color/black"/>
+
+            <RadioButton
+                android:id="@+id/incomesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Incomes"
+                android:textColor="@android:color/black"
+                android:buttonTint="@android:color/black"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <!-- Biểu đồ tròn và huyền thoại -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingVertical="16dp">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            tools:ignore="MissingClass" />
+
+        <!-- Huyền thoại -->
+        <LinearLayout
+            android:id="@+id/legend"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shopping (50%)"
+                android:textColor="#FF00FF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Food (25%)"
+                android:textColor="#FF0000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vacation (10%)"
+                android:textColor="#00FF00"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Health (15%)"
+                android:textColor="#800080"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Phạm vi ngày -->
+    <EditText
+        android:id="@+id/dateRange"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="March (15 Monday - 19)"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"/>
+
+    <!-- Biểu đồ cột -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <!-- LinearLayout chứa các biểu đồ cột trong một hàng -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            tools:ignore="MissingClass">
+
+            <!-- Các Biểu đồ Cột nhỏ -->
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart1"
+                android:layout_width="45dp"
+                android:layout_height="200dp"
+                android:layout_marginEnd="8dp"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart2"
+                android:layout_width="45dp"
+                android:layout_height="200dp"
+                android:layout_marginEnd="8dp"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart3"
+                android:layout_width="45dp"
+                android:layout_height="200dp"
+                android:layout_marginEnd="8dp"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart4"
+                android:layout_width="45dp"
+                android:layout_height="200dp"
+                android:layout_marginEnd="8dp"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart5"
+                android:layout_width="45dp"
+                android:layout_height="200dp"
+                android:layout_marginEnd="8dp"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart6"
+                android:layout_width="45dp"
+                android:layout_height="200dp"
+                android:layout_marginEnd="8dp"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart7"
+                android:layout_width="45dp"
+                android:layout_height="200dp"
+                android:layout_marginEnd="8dp"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Nút điều hướng -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_home"/>
+        <ImageView
+            android:id="@+id/nav_expenses"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_expenses"/>
+        <ImageView
+            android:id="@+id/nav_stats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_stats"/>
+        <ImageView
+            android:id="@+id/nav_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_profile"/>
+    </LinearLayout>
+
+</LinearLayout>
