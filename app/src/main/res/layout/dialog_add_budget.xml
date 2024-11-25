@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="THÊM NGÂN SÁCH"
+        android:textStyle="bold"
+        android:textSize="25sp"/>
+    <EditText
+        android:id="@+id/edt_ten_budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập Tên Danh Mục"/>
+    <EditText
+        android:id="@+id/edt_tien_budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập Số Tiền"/>
+    <EditText
+        android:id="@+id/ngay_budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập Ngày Kết Thúc"/>
+    <Button
+        android:id="@+id/btn_luu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Lưu"/>
+</LinearLayout>
