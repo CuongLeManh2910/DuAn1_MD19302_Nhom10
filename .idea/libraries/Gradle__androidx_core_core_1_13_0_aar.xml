@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.core:core:1.13.0@aar" external-system-id="GRADLE">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/Downloads/gradle-8.7/caches/8.9/transforms/689759f620f2ae2c8965795c99953c6a/transformed/core-1.13.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/Downloads/gradle-8.7/caches/8.9/transforms/689759f620f2ae2c8965795c99953c6a/transformed/core-1.13.0/res" />
+      <root url="file://$USER_HOME$/Downloads/gradle-8.7/caches/8.9/transforms/689759f620f2ae2c8965795c99953c6a/transformed/core-1.13.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Downloads/gradle-8.7/caches/8.9/transforms/689759f620f2ae2c8965795c99953c6a/transformed/core-1.13.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/gradle-8.7/caches/modules-2/files-2.1/androidx.core/core/1.13.0/9ae580505557c829bed91310494b3ccd0a386dfd/core-1.13.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
