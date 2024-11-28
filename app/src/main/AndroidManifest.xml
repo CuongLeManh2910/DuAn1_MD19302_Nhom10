@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AppTaiChinh"
         tools:targetApi="31">
         <activity
+            android:name=".Doipass"
+            android:exported="false" />
+        <activity
+            android:name=".tabs.doipass"
+            android:exported="false" />
+        <activity
             android:name=".Card_TK"
             android:exported="false" />
         <activity

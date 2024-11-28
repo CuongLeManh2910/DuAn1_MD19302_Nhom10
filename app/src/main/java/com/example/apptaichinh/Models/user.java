@@ -1,4 +1,4 @@
-package com.example.apptaichinh.model;
+package com.example.apptaichinh.Models;
 
 public class user {
     private String name;
