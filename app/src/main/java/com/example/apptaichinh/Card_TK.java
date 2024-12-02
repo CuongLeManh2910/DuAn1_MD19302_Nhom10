@@ -5,11 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.apptaichinh.tabs.ThongKePagerAdapter;
@@ -49,7 +45,7 @@ public class Card_TK extends AppCompatActivity {
         btn_expenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Card_TK.this, DanhSachChiTiet.class);
+                Intent intent = new Intent(Card_TK.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });

@@ -42,7 +42,7 @@ public class ThongKe extends AppCompatActivity {
         btn_expenses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ThongKe.this, DanhSachChiTiet.class);
+                Intent intent = new Intent(ThongKe.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });

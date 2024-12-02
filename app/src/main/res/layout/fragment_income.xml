@@ -1,0 +1,67 @@
+<!-- fragment_income.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".IncomeFragment">
+
+    <EditText
+        android:id="@+id/dateEditTextIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/notesEditTextIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ghi chú" />
+
+    <EditText
+        android:id="@+id/amountEditTextIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tiền thu"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/categoryTextViewIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Danh mục"
+        android:padding="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:text="Chọn danh mục" />
+
+    <EditText
+        android:id="@+id/newCategoryEditTextIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Thêm danh mục mới" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addCategoryButtonIncome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thêm" />
+
+    <GridLayout
+        android:id="@+id/categoryGridIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:padding="8dp">
+        <!-- Nút danh mục sẽ được thêm động ở đây -->
+    </GridLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitButtonIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhập khoản thu" />
+
+</LinearLayout>

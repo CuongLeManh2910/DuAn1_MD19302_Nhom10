@@ -16,13 +16,10 @@ public class ThongKePagerAdapter extends FragmentStateAdapter {
         Fragment fragment = null;
         switch (position){
             case 0:
-                fragment = new CardFragment();
+                fragment = new IncomeFragment();
                 break;
             case 1:
-                fragment = new BudgetFragment();
-                break;
-            case 2:
-                fragment = new PayFragment();
+                fragment = new ExpenseFragment();
                 break;
             default:
         }
@@ -31,17 +28,15 @@ public class ThongKePagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 
     public String getPageItem(int position) {
         switch (position){
             case 0:
-                return "Cards";
+                return "Khoản thu";
             case 1:
-                return "Moneys";
-            case 2:
-                return "Pays";
+                return "Khoản chi";
         }
         return "";
     }
