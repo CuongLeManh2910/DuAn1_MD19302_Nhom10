@@ -1,9 +1,12 @@
 package com.example.apptaichinh;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,7 @@ public class CalendarActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
     private GridLayout calendarGrid;
     private TextView incomeTextView, expenseTextView, totalTextView, monthYearTextView;
+    ImageView btn_home, btn_expenses, btn_stats, btn_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +31,35 @@ public class CalendarActivity extends AppCompatActivity {
         expenseTextView = findViewById(R.id.expenseTextView);
         totalTextView = findViewById(R.id.totalTextView);
         monthYearTextView = findViewById(R.id.monthYearTextView);
+        btn_home = findViewById(R.id.nav_home);
+        btn_stats = findViewById(R.id.nav_stats);
+        btn_profile = findViewById(R.id.nav_profile);
 
         databaseHelper = new DatabaseHelper(this);
+
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CalendarActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_stats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CalendarActivity.this, Card_TK.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CalendarActivity.this, Profile.class);
+                startActivity(intent);
+            }
+        });
 
         loadCalendar();
         loadIncomeExpenseData();
@@ -79,17 +110,17 @@ public class CalendarActivity extends AppCompatActivity {
         double totalIncome = 0;
         double totalExpense = 0;
 
-        Cursor incomeCursor = db.rawQuery("SELECT date, amount FROM income WHERE date LIKE ?", new String[]{"%/" + currentMonth});
-        while (incomeCursor.moveToNext()) {
-            double amount = incomeCursor.getDouble(incomeCursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_AMOUNT));
-            totalIncome += amount;
+        String incomeQuery = "SELECT SUM(amount) as total_income FROM income WHERE strftime('%m/%Y', date) = ?";
+        Cursor incomeCursor = db.rawQuery(incomeQuery, new String[]{currentMonth});
+        if (incomeCursor.moveToFirst()) {
+            totalIncome = incomeCursor.getDouble(incomeCursor.getColumnIndexOrThrow("total_income"));
         }
         incomeCursor.close();
 
-        Cursor expenseCursor = db.rawQuery("SELECT date, amount FROM expenses WHERE date LIKE ?", new String[]{"%/" + currentMonth});
-        while (expenseCursor.moveToNext()) {
-            double amount = expenseCursor.getDouble(expenseCursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_AMOUNT));
-            totalExpense += amount;
+        String expenseQuery = "SELECT SUM(amount) as total_expense FROM expenses WHERE strftime('%m/%Y', date) = ?";
+        Cursor expenseCursor = db.rawQuery(expenseQuery, new String[]{currentMonth});
+        if (expenseCursor.moveToFirst()) {
+            totalExpense = expenseCursor.getDouble(expenseCursor.getColumnIndexOrThrow("total_expense"));
         }
         expenseCursor.close();
 
@@ -103,9 +134,10 @@ public class CalendarActivity extends AppCompatActivity {
     private double getIncomeForDay(String date) {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         double income = 0;
-        Cursor cursor = db.rawQuery("SELECT amount FROM income WHERE date = ?", new String[]{date});
+        String query = "SELECT SUM(amount) as total_income FROM income WHERE date = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{date});
         if (cursor.moveToFirst()) {
-            income = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_AMOUNT));
+            income = cursor.getDouble(cursor.getColumnIndexOrThrow("total_income"));
         }
         cursor.close();
         return income;
@@ -114,9 +146,10 @@ public class CalendarActivity extends AppCompatActivity {
     private double getExpenseForDay(String date) {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         double expense = 0;
-        Cursor cursor = db.rawQuery("SELECT amount FROM expenses WHERE date = ?", new String[]{date});
+        String query = "SELECT SUM(amount) as total_expense FROM expenses WHERE date = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{date});
         if (cursor.moveToFirst()) {
-            expense = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_AMOUNT));
+            expense = cursor.getDouble(cursor.getColumnIndexOrThrow("total_expense"));
         }
         cursor.close();
         return expense;
@@ -133,15 +166,17 @@ public class CalendarActivity extends AppCompatActivity {
         double income = 0;
         double expense = 0;
 
-        Cursor incomeCursor = db.rawQuery("SELECT amount FROM income WHERE date = ?", new String[]{date});
+        String incomeQuery = "SELECT SUM(amount) as total_income FROM income WHERE date = ?";
+        Cursor incomeCursor = db.rawQuery(incomeQuery, new String[]{date});
         if (incomeCursor.moveToFirst()) {
-            income = incomeCursor.getDouble(incomeCursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_AMOUNT));
+            income = incomeCursor.getDouble(incomeCursor.getColumnIndexOrThrow("total_income"));
         }
         incomeCursor.close();
 
-        Cursor expenseCursor = db.rawQuery("SELECT amount FROM expenses WHERE date = ?", new String[]{date});
+        String expenseQuery = "SELECT SUM(amount) as total_expense FROM expenses WHERE date = ?";
+        Cursor expenseCursor = db.rawQuery(expenseQuery, new String[]{date});
         if (expenseCursor.moveToFirst()) {
-            expense = expenseCursor.getDouble(expenseCursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_AMOUNT));
+            expense = expenseCursor.getDouble(expenseCursor.getColumnIndexOrThrow("total_expense"));
         }
         expenseCursor.close();
 

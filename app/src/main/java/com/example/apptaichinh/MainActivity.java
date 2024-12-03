@@ -1,69 +1,146 @@
 package com.example.apptaichinh;
 
-import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.apptaichinh.Adapters.TransactionAdapter;
+import com.example.apptaichinh.Models.Transaction;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView btn_home, btn_expenses, btn_stats, btn_profile;
+    private DatabaseHelper databaseHelper;
+    private TextView totalBalance, expenses, incomes;
+    private ListView transactionListView;
+    private ImageButton alarmButton;
+    private ImageView btn_home, btn_expenses, btn_stats, btn_profile;
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
-        btn_home = findViewById(R.id.nav_home);
+        // Liên kết các đối tượng giao diện với các thành phần trong XML
+        totalBalance = findViewById(R.id.total_balance);
+        expenses = findViewById(R.id.expenses);
+        incomes = findViewById(R.id.incomes);
+        transactionListView = findViewById(R.id.transactionListView);
+        alarmButton = findViewById(R.id.alarm);
         btn_expenses = findViewById(R.id.nav_expenses);
         btn_stats = findViewById(R.id.nav_stats);
         btn_profile = findViewById(R.id.nav_profile);
 
+        databaseHelper = new DatabaseHelper(this);
 
-//        btn_home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        // Tải dữ liệu số dư, thu nhập, chi tiêu và các giao dịch gần đây
+        loadBalanceData();
+        loadTransactionData();
 
-        btn_expenses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
-                startActivity(intent);
-            }
+        // Đặt sự kiện cho nút báo thức
+        alarmButton.setOnClickListener(v -> showTimePickerDialog());
+
+        // Xử lý các sự kiện nút điều hướng
+        btn_expenses.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+            startActivity(intent);
         });
 
-        btn_stats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Card_TK.class);
-                startActivity(intent);
-            }
+        btn_stats.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Card_TK.class);
+            startActivity(intent);
         });
 
-        btn_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Profile.class);
-                startActivity(intent);
-            }
+        btn_profile.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Profile.class);
+            startActivity(intent);
         });
+    }
+
+    private void loadBalanceData() {
+        // Lấy tháng hiện tại dưới định dạng MM/yyyy
+        String currentMonth = new SimpleDateFormat("MM/yyyy", Locale.getDefault()).format(Calendar.getInstance().getTime());
+
+        // Truy vấn tổng thu nhập và chi tiêu
+        double totalIncome = databaseHelper.getTotalIncomeByMonth(currentMonth);
+        double totalExpense = databaseHelper.getTotalExpenseByMonth(currentMonth);
+
+        // Tính toán số dư hiện tại
+        double totalBalanceValue = totalIncome - totalExpense;
+
+        // Cập nhật giao diện với các giá trị đã tính toán
+        totalBalance.setText(String.format(Locale.getDefault(), "%,.2f₫", totalBalanceValue));
+        incomes.setText(String.format(Locale.getDefault(), "%,.2f₫", totalIncome));
+        expenses.setText(String.format(Locale.getDefault(), "%,.2f₫", totalExpense));
+    }
+
+    private void loadTransactionData() {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        Cursor cursor = databaseHelper.getRecentTransactions();
+        while (cursor.moveToNext()) {
+            String date = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_DATE));
+            String notes = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_NOTES));
+            double amount = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_AMOUNT));
+            transactions.add(new Transaction(date, notes, amount));
+        }
+        cursor.close();
+
+        // Tạo adapter để hiển thị danh sách giao dịch
+        TransactionAdapter adapter = new TransactionAdapter(this, transactions);
+        transactionListView.setAdapter(adapter);
+    }
+
+    private void showTimePickerDialog() {
+        // Lấy thời gian hiện tại
+        Calendar currentTime = Calendar.getInstance();
+        int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = currentTime.get(Calendar.MINUTE);
+
+        // Tạo TimePickerDialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view, hourOfDay, minute1) -> {
+            // Khi người dùng chọn thời gian, thiết lập báo thức
+            setAlarm(hourOfDay, minute1);
+        }, hour, minute, true);
+
+        timePickerDialog.show();
+    }
+
+    private void setAlarm(int hourOfDay, int minute) {
+        // Lấy đối tượng AlarmManager
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        // Tạo Intent để BroadcastReceiver nhận sự kiện báo thức
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent,
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_IMMUTABLE : 0);
+
+        // Đặt thời gian báo thức
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+
+        // Đặt báo thức lặp lại hàng ngày
+        if (alarmManager != null) {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                    AlarmManager.INTERVAL_DAY, pendingIntent);
+            Toast.makeText(this, "Báo thức đã được đặt vào " + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
+        }
     }
 }

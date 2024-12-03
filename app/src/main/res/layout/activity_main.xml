@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,14 +16,31 @@
         android:orientation="vertical"
         android:gravity="center"
         android:background="#9C27B0">
-        <TextView
-            android:id="@+id/greeting"
-            android:layout_width="wrap_content"
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello, Wisteria Ravenclaw"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/greeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIMPLE MONEY"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <ImageButton
+                android:id="@+id/alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_alarm"
+                android:background="#9C27B0"
+                android:layout_marginLeft="30dp"/>
+        </LinearLayout>
+
 
 
         <LinearLayout
@@ -36,7 +54,7 @@
                 android:id="@+id/total_balance_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thu Nhập"
+                android:text="Tổng số dư"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"/>
             <TextView
@@ -85,7 +103,7 @@
                         android:id="@+id/incomes_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Số dư"
+                        android:text="Thu nhập"
                         android:textSize="16sp"/>
                     <TextView
                         android:id="@+id/incomes"
@@ -105,7 +123,6 @@
                 android:text="A tip for fixing your budget"
                 android:textSize="14sp"
                 android:layout_marginTop="16dp"/>
-
         </LinearLayout>
     </LinearLayout>
 
@@ -113,6 +130,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <!-- Recent Transactions -->
         <TextView
             android:id="@+id/recent_transactions_label"
@@ -124,45 +142,14 @@
             android:layout_marginTop="16dp"/>
 
         <!-- Example Transaction Item -->
-        <LinearLayout
+        <ListView
+            android:id="@+id/transactionListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
-
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="390dp"/>
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/transaction_name"-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_weight="1"-->
-            <!--                android:text="Food perspiciatis unde"-->
-            <!--                android:textSize="16sp"/>-->
-            <!--            <TextView-->
-            <!--                android:id="@+id/transaction_date"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:text="19 March"-->
-            <!--                android:textSize="16sp"/>-->
-            <!--            <TextView-->
-            <!--                android:id="@+id/transaction_amount"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:text="-$40"-->
-            <!--                android:textSize="16sp"-->
-            <!--                android:textColor="@android:color/holo_red_dark"-->
-            <!--                android:layout_marginLeft="8dp"/>-->
-            <!--        </LinearLayout>-->
-
-            <!-- Add more transaction items similarly -->
-        </LinearLayout>
-
-        <!-- Navigation Bar -->
-
+            android:layout_height="380dp"
+            android:layout_marginTop="8dp"/>
     </LinearLayout>
+
+    <!-- Navigation Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -181,13 +168,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_expenses"/>
+            android:src="@drawable/ic_calendar"/>
         <ImageView
             android:id="@+id/nav_stats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_stats"/>
+            android:src="@drawable/ic_expenses"/>
         <ImageView
             android:id="@+id/nav_profile"
             android:layout_width="wrap_content"

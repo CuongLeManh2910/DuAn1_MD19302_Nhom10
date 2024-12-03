@@ -199,13 +199,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_expenses"/>
+                android:src="@drawable/ic_calendar"/>
             <ImageView
                 android:id="@+id/nav_stats"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_stats"/>
+                android:src="@drawable/ic_expenses"/>
             <ImageView
                 android:id="@+id/nav_profile"
                 android:layout_width="0dp"

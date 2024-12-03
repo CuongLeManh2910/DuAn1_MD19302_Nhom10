@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Thống kê"
+            android:text="NHẬP LIỆU"
             android:textStyle="bold"
             android:textSize="30dp"
             android:textColor="@color/white"/>
@@ -53,13 +53,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_expenses"/>
+            android:src="@drawable/ic_calendar"/>
         <ImageView
             android:id="@+id/nav_stats"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_stats"/>
+            android:src="@drawable/ic_expenses"/>
         <ImageView
             android:id="@+id/nav_profile"
             android:layout_width="0dp"

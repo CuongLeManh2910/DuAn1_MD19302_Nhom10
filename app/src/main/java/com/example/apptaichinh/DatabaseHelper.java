@@ -2,13 +2,14 @@ package com.example.apptaichinh;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "expenses.db";
-    private static final int DATABASE_VERSION = 5; // Tăng phiên bản cơ sở dữ liệu
+    private static final int DATABASE_VERSION = 5;
 
     public static final String TABLE_EXPENSES = "expenses";
     public static final String COLUMN_ID = "_id";
@@ -115,5 +116,65 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         }
     }
-}
 
+    // Phương thức để thêm thu nhập
+    public long addIncome(String date, String notes, double amount, String category) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DATE, date);
+        values.put(COLUMN_NOTES, notes);
+        values.put(COLUMN_AMOUNT, amount);
+        values.put(COLUMN_CATEGORY, category);
+        return db.insert(TABLE_INCOME, null, values);
+    }
+
+    // Phương thức để thêm chi tiêu
+    public long addExpense(String date, String notes, double amount, String category) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DATE, date);
+        values.put(COLUMN_NOTES, notes);
+        values.put(COLUMN_AMOUNT, amount);
+        values.put(COLUMN_CATEGORY, category);
+        return db.insert(TABLE_EXPENSES, null, values);
+    }
+
+    // Phương thức để lấy tổng thu nhập theo tháng
+    public double getTotalIncomeByMonth(String monthYear) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        double totalIncome = 0;
+        String query = "SELECT SUM(amount) as total_income FROM income WHERE strftime('%m/%Y', date) = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{monthYear});
+        if (cursor.moveToFirst()) {
+            int index = cursor.getColumnIndex("total_income");
+            if (index != -1) {
+                totalIncome = cursor.getDouble(index);
+            }
+        }
+        cursor.close();
+        return totalIncome;
+    }
+
+    // Phương thức để lấy tổng chi tiêu theo tháng
+    public double getTotalExpenseByMonth(String monthYear) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        double totalExpense = 0;
+        String query = "SELECT SUM(amount) as total_expense FROM expenses WHERE strftime('%m/%Y', date) = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{monthYear});
+        if (cursor.moveToFirst()) {
+            int index = cursor.getColumnIndex("total_expense");
+            if (index != -1) {
+                totalExpense = cursor.getDouble(index);
+            }
+        }
+        cursor.close();
+        return totalExpense;
+    }
+
+    // Phương thức để lấy các giao dịch gần đây
+    public Cursor getRecentTransactions() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM expenses ORDER BY date DESC LIMIT 10";
+        return db.rawQuery(query, null);
+    }
+}
