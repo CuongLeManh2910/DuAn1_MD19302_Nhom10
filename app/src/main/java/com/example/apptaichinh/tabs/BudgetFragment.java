@@ -73,7 +73,7 @@ public class BudgetFragment extends Fragment {
                             return;
                         }
                         if(tongtien.length() <= 0){
-                            Toast.makeText(getContext(), "So tirn phai lon hon 0", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "So tien phai lon hon 0", Toast.LENGTH_SHORT).show();
                         }
 
                         Budget budget = new Budget();
