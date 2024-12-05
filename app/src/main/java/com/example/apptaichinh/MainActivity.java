@@ -82,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
         double totalBalanceValue = totalIncome - totalExpense;
 
         // Cập nhật giao diện với các giá trị đã tính toán
-        totalBalance.setText(String.format(Locale.getDefault(), "%,.2f₫", totalBalanceValue));
-        incomes.setText(String.format(Locale.getDefault(), "%,.2f₫", totalIncome));
-        expenses.setText(String.format(Locale.getDefault(), "%,.2f₫", totalExpense));
+        totalBalance.setText(String.format(Locale.getDefault(), "%,.0f₫", totalBalanceValue));
+        incomes.setText(String.format(Locale.getDefault(), "%,.0f₫", totalIncome));
+        expenses.setText(String.format(Locale.getDefault(), "%,.0f₫", totalExpense));
     }
 
     private void loadTransactionData() {
