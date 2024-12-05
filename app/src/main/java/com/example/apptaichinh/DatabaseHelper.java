@@ -85,8 +85,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void addDefaultCategories(SQLiteDatabase db) {
         String[] expenseCategories = {
-                "Ăn uống", "Chi tiêu hàng ngày", "Quần áo",
-                "Mỹ phẩm", "Phí giao lưu", "Phí y tế",
+                "Ăn uống", "Hàng ngày", "Quần áo",
+                "Mỹ phẩm", "Giao lưu", "Phí y tế",
                 "Giáo dục", "Tiền điện", "Đi lại",
                 "Liên lạc", "Tiền nhà"
         };
