@@ -1,6 +1,5 @@
 package com.example.apptaichinh.Adapters;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,10 +49,12 @@ public class TransactionAdapter extends BaseAdapter {
         TextView transactionDate = convertView.findViewById(R.id.transaction_date);
         TextView transactionNotes = convertView.findViewById(R.id.transaction_notes);
         TextView transactionAmount = convertView.findViewById(R.id.transaction_amount);
+        TextView transactionType = convertView.findViewById(R.id.transaction_type);
 
         transactionDate.setText(transaction.getDate());
         transactionNotes.setText(transaction.getNotes());
         transactionAmount.setText(String.format(Locale.getDefault(), "%,.2f₫", transaction.getAmount()));
+        transactionType.setText(transaction.getType().equals("income") ? "Thu" : "Chi");
 
         return convertView;
     }

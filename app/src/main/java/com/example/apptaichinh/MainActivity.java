@@ -6,13 +6,13 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -74,12 +74,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadBalanceData() {
-        // Lấy tháng hiện tại dưới định dạng MM/yyyy
-        String currentMonth = new SimpleDateFormat("MM/yyyy", Locale.getDefault()).format(Calendar.getInstance().getTime());
-
-        // Truy vấn tổng thu nhập và chi tiêu
-        double totalIncome = databaseHelper.getTotalIncomeByMonth(currentMonth);
-        double totalExpense = databaseHelper.getTotalExpenseByMonth(currentMonth);
+        // Truy vấn tổng thu nhập và chi tiêu mà không cần lọc theo tháng
+        double totalIncome = databaseHelper.getTotalIncome();
+        double totalExpense = databaseHelper.getTotalExpense();
 
         // Tính toán số dư hiện tại
         double totalBalanceValue = totalIncome - totalExpense;
@@ -92,12 +89,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadTransactionData() {
         ArrayList<Transaction> transactions = new ArrayList<>();
-        Cursor cursor = databaseHelper.getRecentTransactions();
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        // Truy vấn các giao dịch gần đây từ cả thu nhập và chi tiêu
+        Cursor cursor = db.rawQuery(
+                "SELECT date, notes, amount, 'income' as type FROM income " +
+                        "UNION ALL " +
+                        "SELECT date, notes, amount, 'expenses' as type FROM expenses " +
+                        "ORDER BY date DESC LIMIT 10", null);
+
         while (cursor.moveToNext()) {
-            String date = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_DATE));
-            String notes = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_NOTES));
-            double amount = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_AMOUNT));
-            transactions.add(new Transaction(date, notes, amount));
+            String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
+            String notes = cursor.getString(cursor.getColumnIndexOrThrow("notes"));
+            double amount = cursor.getDouble(cursor.getColumnIndexOrThrow("amount"));
+            String type = cursor.getString(cursor.getColumnIndexOrThrow("type"));
+            transactions.add(new Transaction(date, notes, amount, type));
         }
         cursor.close();
 
@@ -140,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         if (alarmManager != null) {
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                     AlarmManager.INTERVAL_DAY, pendingIntent);
-            Toast.makeText(this, "Báo thức đã được đặt vào " + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Đã đặt thông báo vào " + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
         }
     }
 }

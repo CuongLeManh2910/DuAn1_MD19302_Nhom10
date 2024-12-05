@@ -47,6 +47,7 @@
         android:id="@+id/addCategoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_bg"
         android:text="Thêm" />
 
     <GridLayout
@@ -54,6 +55,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="3"
+        android:background="#D1D1D1"
+        android:layout_margin="10dp"
         android:padding="8dp">
         <!-- Nút danh mục sẽ được thêm động ở đây -->
     </GridLayout>
@@ -62,6 +65,7 @@
         android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_bg"
         android:text="Nhập khoản chi" />
 
 </LinearLayout>

@@ -1,14 +1,18 @@
 package com.example.apptaichinh.Models;
 
+
 public class Transaction {
     private String date;
     private String notes;
     private double amount;
+    private String type;
 
-    public Transaction(String date, String notes, double amount) {
+    // Constructor cập nhật để bao gồm trường type
+    public Transaction(String date, String notes, double amount, String type) {
         this.date = date;
         this.notes = notes;
         this.amount = amount;
+        this.type = type;
     }
 
     public String getDate() {
@@ -22,5 +26,8 @@ public class Transaction {
     public double getAmount() {
         return amount;
     }
-}
 
+    public String getType() {
+        return type;
+    }
+}

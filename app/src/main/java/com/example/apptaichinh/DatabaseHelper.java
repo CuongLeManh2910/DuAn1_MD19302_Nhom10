@@ -139,12 +139,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.insert(TABLE_EXPENSES, null, values);
     }
 
-    // Phương thức để lấy tổng thu nhập theo tháng
-    public double getTotalIncomeByMonth(String monthYear) {
+    // Phương thức để lấy tổng thu nhập
+    public double getTotalIncome() {
         SQLiteDatabase db = this.getReadableDatabase();
         double totalIncome = 0;
-        String query = "SELECT SUM(amount) as total_income FROM income WHERE strftime('%m/%Y', date) = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{monthYear});
+        String query = "SELECT SUM(amount) as total_income FROM income";
+        Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             int index = cursor.getColumnIndex("total_income");
             if (index != -1) {
@@ -155,12 +155,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return totalIncome;
     }
 
-    // Phương thức để lấy tổng chi tiêu theo tháng
-    public double getTotalExpenseByMonth(String monthYear) {
+    // Phương thức để lấy tổng chi tiêu
+    public double getTotalExpense() {
         SQLiteDatabase db = this.getReadableDatabase();
         double totalExpense = 0;
-        String query = "SELECT SUM(amount) as total_expense FROM expenses WHERE strftime('%m/%Y', date) = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{monthYear});
+        String query = "SELECT SUM(amount) as total_expense FROM expenses";
+        Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()) {
             int index = cursor.getColumnIndex("total_expense");
             if (index != -1) {

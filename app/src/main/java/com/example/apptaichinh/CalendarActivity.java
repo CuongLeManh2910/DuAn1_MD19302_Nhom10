@@ -32,33 +32,25 @@ public class CalendarActivity extends AppCompatActivity {
         totalTextView = findViewById(R.id.totalTextView);
         monthYearTextView = findViewById(R.id.monthYearTextView);
         btn_home = findViewById(R.id.nav_home);
+        btn_expenses = findViewById(R.id.nav_expenses);
         btn_stats = findViewById(R.id.nav_stats);
         btn_profile = findViewById(R.id.nav_profile);
 
         databaseHelper = new DatabaseHelper(this);
 
-        btn_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CalendarActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
+        btn_home.setOnClickListener(v -> {
+            Intent intent = new Intent(CalendarActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
-        btn_stats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CalendarActivity.this, Card_TK.class);
-                startActivity(intent);
-            }
+        btn_stats.setOnClickListener(v -> {
+            Intent intent = new Intent(CalendarActivity.this, Card_TK.class);
+            startActivity(intent);
         });
 
-        btn_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CalendarActivity.this, Profile.class);
-                startActivity(intent);
-            }
+        btn_profile.setOnClickListener(v -> {
+            Intent intent = new Intent(CalendarActivity.this, Profile.class);
+            startActivity(intent);
         });
 
         loadCalendar();

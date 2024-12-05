@@ -26,8 +26,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Tạo thông báo
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_alarm)
-                .setContentTitle("Báo thức")
-                .setContentText("Đã đến giờ!")
+                .setContentTitle("Thông báo")
+                .setContentText("Hãy nhập thu chi hôm nay nhé!")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
