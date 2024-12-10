@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="#9C27B0">
+        android:background="@drawable/background_01">
 
 
         <LinearLayout
@@ -47,7 +47,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/white"
+            android:background="@drawable/background_02"
             android:padding="10dp"
             android:layout_margin="10dp">
             <TextView
