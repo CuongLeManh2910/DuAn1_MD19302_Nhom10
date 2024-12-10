@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".IncomeFragment">
@@ -48,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
+        app:backgroundTint="@null"
         android:text="Thêm" />
 
     <GridLayout
@@ -66,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
+        app:backgroundTint="@null"
         android:text="Nhập khoản thu" />
 
 </LinearLayout>

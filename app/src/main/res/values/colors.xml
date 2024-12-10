@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="selected_day_color">#F2F2F2</color>
+    <color name="normal_day_color">#CECBCB</color>
+    <color name="button_pressed_color">#FF4081</color>  <!-- Màu khi nhấn nút -->
+    <color name="button_default_color">#9C27B0</color>  <!-- Màu mặc định của nút -->
+
 </resources>

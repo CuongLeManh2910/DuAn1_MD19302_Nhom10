@@ -34,32 +34,93 @@
         <!-- Các ô ngày tháng sẽ được thêm động ở đây -->
     </GridLayout>
 
+    <TextView
+        android:id="@+id/dailyIncomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thu nhập trong ngày: 0₫"
+        android:textColor="#192B7C"
+        android:layout_margin="8dp"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/dailyExpenseTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chi tiêu trong ngày: 0₫"
+        android:textColor="#DB3427"
+        android:layout_margin="8dp"
+        android:textSize="20sp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
         android:padding="16dp">
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
-            android:id="@+id/incomeTextView"
-            android:text="Thu nhập: 0₫"
-            android:textSize="18sp" />
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thu nhập"
+                android:textSize="14sp"
+                android:gravity="center"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/expenseTextView"
-            android:text="Chi tiêu: 0₫"
-            android:textSize="18sp" />
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/incomeTextView"
+                android:text="0₫"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#2196F3"/>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
-            android:id="@+id/totalTextView"
-            android:text="Tổng: 0₫"
-            android:textSize="18sp" />
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chi tiêu"
+                android:textSize="14sp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/expenseTextView"
+                android:text="0₫"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#F44336"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tổng"
+                android:textSize="14sp"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/totalTextView"
+                android:text="0₫"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#083AD1"/>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -67,7 +128,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="bottom"
-        android:layout_marginTop="270dp">
+        android:layout_marginTop="200dp">
 
         <ImageView
             android:id="@+id/nav_home"
