@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class CalendarActivity extends AppCompatActivity {
     private TextView incomeTextView, expenseTextView, totalTextView, monthYearTextView;
     private TextView dailyIncomeTextView, dailyExpenseTextView;
     ImageView btn_home, btn_expenses, btn_stats, btn_profile;
+    ImageButton btn_show;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", new Locale("vi", "VN"));
 
     // Biến để lưu trữ TextView của ngày đã chọn
@@ -48,6 +50,9 @@ public class CalendarActivity extends AppCompatActivity {
         btn_expenses = findViewById(R.id.nav_expenses);
         btn_stats = findViewById(R.id.nav_stats);
         btn_profile = findViewById(R.id.nav_profile);
+        btn_show = findViewById(R.id.btn_show);
+
+
 
         // Khởi tạo DatabaseHelper
         databaseHelper = new DatabaseHelper(this);
@@ -79,6 +84,14 @@ public class CalendarActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CalendarActivity.this, Statistic.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -93,6 +106,7 @@ public class CalendarActivity extends AppCompatActivity {
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         int firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;  // Ngày trong tuần của ngày đầu tháng (0 = Chủ nhật)
         int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);  // Số ngày trong tháng
+
 
         // Hiển thị tháng và năm hiện tại
         String monthYear = String.format(Locale.getDefault(), "%02d/%d", currentMonth + 1, currentYear);
@@ -154,13 +168,19 @@ public class CalendarActivity extends AppCompatActivity {
         }
     }
 
+    String currentMonthYear = getCurrentMonthYear();
+
+    private String getCurrentMonthYear() {
+        // Get current month and year in the format "MM/yyyy"
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MM/yyyy");
+        return sdf.format(new java.util.Date());
+    }
+
     private void loadIncomeExpenseData() {
-        Calendar calendar = Calendar.getInstance();
-        String currentMonth = new SimpleDateFormat("MM/yyyy", Locale.getDefault()).format(calendar.getTime());
 
         // Truy vấn tổng thu nhập và chi tiêu mà không cần lọc theo tháng
-        double totalIncome = databaseHelper.getTotalIncome();
-        double totalExpense = databaseHelper.getTotalExpense();
+        double totalIncome = databaseHelper.getTotalIncomeByMonth(currentMonthYear);
+        double totalExpense = databaseHelper.getTotalExpenseByMonth(currentMonthYear);
 
         // Tính toán số dư hiện tại
         double totalBalanceValue = totalIncome - totalExpense;
